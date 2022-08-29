@@ -33,5 +33,6 @@ describe('BDD - Creating an order', () => {
 
         const iPersistence = stubInterface<IPersistence>()
         const orderRepository = new CreateOrderRepository(iPersistence)
+        orderRepository.execute = sinon.stub().returns(OrderMock)
     })
 })
