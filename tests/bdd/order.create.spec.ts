@@ -15,7 +15,7 @@ const expect = chai.expect
 
 
 describe('BDD - Creating an order', () => {
-    it('BDD - Should create an order', () => {
+    it('BDD - Should create an order', async () => {
 
         const userMock: User = {
             name: "John McBurguer",
@@ -38,7 +38,7 @@ describe('BDD - Creating an order', () => {
         orderRepository.execute = sinon.stub().returns(OrderMock)
 
         const orderCreateUseCase = new OrderCreateUseCase(orderRepository)
-        const result = orderCreateUseCase.execute(OrderMock)
+        const result = await orderCreateUseCase.execute(OrderMock)
 
         expect(result).to.be.equal(OrderMock)
     })
