@@ -9,10 +9,11 @@ import { Order } from "../../src/domain/entities/Order";
 import { IPersistence } from "../../src/domain/repository/IPersistence";
 import { CreateOrderRepository } from "../../src/domain/repository/order/CreateOrderRepository";
 import { OrderCreateUseCase } from "../../src/domain/usecase/order/OrderCreateUseCase";
+import { MessageMail } from "../../src/domain/entities/MessageMail";
+import { IMail } from "../../src/domain/providers/IMail";
 
 chai.use(chaiAsPromised)
 const expect = chai.expect
-
 
 describe('BDD - Creating an order', () => {
     it('BDD - Should create an order', async () => {
@@ -33,12 +34,20 @@ describe('BDD - Creating an order', () => {
             product: productMock
         }
 
+        const messageMail: MessageMail = {
+            from: "asdf@email.com",
+            to: "fghj@email.com",
+            subject: "TDD-BDD Tests with email",
+            html: "<body>Hello, that's all<body>"
+        }
+
         const iPersistence = stubInterface<IPersistence>()
         const orderRepository = new CreateOrderRepository(iPersistence)
         orderRepository.execute = sinon.stub().returns(OrderMock)
 
-        const orderCreateUseCase = new OrderCreateUseCase(orderRepository)
-        const result = await orderCreateUseCase.execute(OrderMock)
+        const iMail = stubInterface<IMail>()
+        const orderCreateUseCase = new OrderCreateUseCase(orderRepository, iMail)
+        const result = await orderCreateUseCase.execute(OrderMock, messageMail)
 
         expect(result).to.be.equal(OrderMock)
     })
