@@ -12,6 +12,14 @@ import { CreateOrderRepository } from "../../src/domain/repository/order/CreateO
 chai.use(chaiAsPromised)
 const expect = chai.expect
 
+class OrderCreateUseCase {
+    constructor(private orderRepository: CreateOrderRepository) { }
+
+    public async execute(entity: Order) {
+        this.orderRepository.execute(entity)
+    }
+}
+
 describe('BDD - Creating an order', () => {
     it('BDD - Should create an order', () => {
 
@@ -34,5 +42,10 @@ describe('BDD - Creating an order', () => {
         const iPersistence = stubInterface<IPersistence>()
         const orderRepository = new CreateOrderRepository(iPersistence)
         orderRepository.execute = sinon.stub().returns(OrderMock)
+
+        const orderCreateUseCase = new OrderCreateUseCase(orderRepository)
+        const result = orderCreateUseCase.execute(OrderMock)
+
+        expect(result).to.be.equal(OrderMock)
     })
 })
