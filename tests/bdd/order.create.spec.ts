@@ -6,21 +6,11 @@ import { stubInterface } from "ts-sinon";
 import { User } from "../../src/domain/entities/User";
 import { Product } from "../../src/domain/entities/Product";
 import { Order } from "../../src/domain/entities/Order";
+import { IPersistence } from "../../src/domain/repository/IPersistence";
+import { CreateOrderRepository } from "../../src/domain/repository/order/CreateOrderRepository";
 
 chai.use(chaiAsPromised)
 const expect = chai.expect
-
-interface IPersistence {
-    create(entity: any): Promise<void>
-}
-
-class CreateOrderRepository {
-    constructor(private iPersistence: IPersistence) { }
-
-    public async execute(entity: Order): Promise<void> {
-        this.iPersistence.create(entity)
-    }
-}
 
 describe('BDD - Creating an order', () => {
     it('BDD - Should create an order', () => {
