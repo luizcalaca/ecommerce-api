@@ -4,8 +4,9 @@ import { CreateOrderRepository } from "../../repository/order/CreateOrderReposit
 class OrderCreateUseCase {
     constructor(private orderRepository: CreateOrderRepository) { }
 
-    public async execute(entity: Order) {
-        this.orderRepository.execute(entity)
+    public async execute(entity: Order): Promise<Order> {
+        await this.orderRepository.execute(entity)
+        return entity
     }
 }
 

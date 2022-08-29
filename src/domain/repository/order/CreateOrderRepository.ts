@@ -5,7 +5,7 @@ class CreateOrderRepository {
     constructor(private iPersistence: IPersistence) { }
 
     public async execute(entity: Order): Promise<void> {
-        this.iPersistence.create(entity)
+        await this.iPersistence.create(entity)
     }
 }
 
