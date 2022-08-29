@@ -2,24 +2,9 @@ import { describe } from "mocha";
 import chaiAsPromised from 'chai-as-promised';
 import * as chai from 'chai'
 import sinon from 'sinon'
-
-class User {
-    name: string
-    email: string
-}
-
-class Order {
-    user: User
-    product: Product
-    quantity: number
-}
-
-class Product {
-    name: string
-    price: number
-}
-
-
+import { User } from "../../src/domain/entities/User";
+import { Product } from "../../src/domain/entities/Product";
+import { Order } from "../../src/domain/entities/Order";
 
 chai.use(chaiAsPromised)
 const expect = chai.expect
