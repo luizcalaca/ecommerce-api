@@ -10,8 +10,15 @@ class User {
 
 class Order {
     user: User
+    product: Product
     quantity: number
 }
+
+class Product {
+    name: string
+    price: number
+}
+
 
 
 chai.use(chaiAsPromised)
@@ -20,14 +27,20 @@ const expect = chai.expect
 describe('BDD - Creating an order', () => {
     it('BDD - Should create and order', () => {
 
-        const user: User = {
+        const userMock: User = {
             name: "John McBurguer",
             email: "johnburger@email.com"
         }
 
+        const productMock: Product = {
+            name: "Computer",
+            price: 900.99
+        }
+
         const OrderMock: Order = {
             quantity: 0,
-            user: user
+            user: userMock,
+            product: productMock
         }
     })
 })
