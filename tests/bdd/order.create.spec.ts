@@ -8,17 +8,11 @@ import { Product } from "../../src/domain/entities/Product";
 import { Order } from "../../src/domain/entities/Order";
 import { IPersistence } from "../../src/domain/repository/IPersistence";
 import { CreateOrderRepository } from "../../src/domain/repository/order/CreateOrderRepository";
+import { OrderCreateUseCase } from "../../src/domain/usecase/order/OrderCreateUseCase";
 
 chai.use(chaiAsPromised)
 const expect = chai.expect
 
-class OrderCreateUseCase {
-    constructor(private orderRepository: CreateOrderRepository) { }
-
-    public async execute(entity: Order) {
-        this.orderRepository.execute(entity)
-    }
-}
 
 describe('BDD - Creating an order', () => {
     it('BDD - Should create an order', () => {
